@@ -1,0 +1,25 @@
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(39, 39, 39);
+}
+
+.borderForm{
+    box-shadow: 5px 5px 15px 5px rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 100px;
+    background-color: #fff;
+}
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    width: 100%;
+}

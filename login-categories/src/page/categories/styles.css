@@ -1,0 +1,53 @@
+.heder{
+    display: flex;
+    padding-left:50px;
+    text-align: center;
+    padding-bottom: 25px;
+    
+   
+}
+.heder li {
+    margin-right: 20px;
+    display: flex;
+
+}
+.heder1{
+    background-color: black;
+   
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+.btn-excluir{
+    color: black;
+}
+.btn-editar{
+    color: black;
+    text-decoration: none;
+}
+.linkbtn{
+    text-decoration: none;
+    color: white;
+}
+.btn-novaCategoria{
+    margin:unset;
+    margin-top: 25px;
+}
+.linkbtn:hover{    
+    color: white;
+}
+.td-editar{
+    display: flex;
+}
+.btn-excluir:hover{
+    color: blue;
+}
+.btn-excluir{
+    margin-left: 10px;
+}
+
+
