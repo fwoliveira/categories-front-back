@@ -3,7 +3,7 @@ const Categories = require('../models/categories');
 
 exports.findAll = async (req, res) => {
     await Products.findAll({
-        attributes: ['id','name', 'description'],
+        attributes: ['id','name', 'description', 'quantity','price','categorieId'],
         order:[['id','ASC']], 
         include:[Categories]
     })

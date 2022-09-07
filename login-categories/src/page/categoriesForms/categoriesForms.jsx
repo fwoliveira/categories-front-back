@@ -135,6 +135,13 @@ export const CategoriesForm = (props) => {
     }
  return (
     <>
+      <div className="heder1"> 
+         <ul className="heder">
+        <li>
+        <Button variant="outline-success"   className="btn-novaCategoria"> <Link to="/categories" className="linkbtn">Sair</Link> </Button>   
+        </li>
+       </ul>
+       </div>
     <div className="box">
        
          {/* <Container className="box"> */}

@@ -158,7 +158,7 @@ exports.login = async (req, res) => {
     }
 
     var token = jwt.sign({ id: user.id }, process.env.SECRET, {
-        expiresIn: 600 // 10min
+        expiresIn: 60000 // 10min
         // expiresIn: 60 // 1min
     });
 

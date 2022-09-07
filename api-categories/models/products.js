@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../database/db');
 const Categories = require('./Categories');
 
-const Products = db.define('fwilliam_products', {
+const Products = db.define('fwill_products', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -35,7 +35,7 @@ Products.belongsTo(Categories, {
 })
 
 //Criar a tabela com sequelize
- //Products.sync();
+//Products.sync();
 
 //Excluir a tabela e criar novamente
 // Products.sync({ force: true});

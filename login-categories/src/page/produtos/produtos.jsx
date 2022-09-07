@@ -5,12 +5,11 @@ import { Context } from '../../Context/AuthContext';
 import Table from 'react-bootstrap/Table';
 import './styles.css'
 import { confirmAlert } from 'react-confirm-alert';
-import "react-confirm-alert/src/react-confirm-alert.css";
 import { useHistory } from 'react-router-dom';
 
 import { Nav, Navbar, Container, Button, Form } from 'react-bootstrap';
 
-export const ListaCategories = () => {
+export const ListaProducts = () => {
 
     const history = useHistory();
 
@@ -23,28 +22,28 @@ export const ListaCategories = () => {
         mensagem:''
     })
 
-    const confirmDelete = (categories) => {
+    const confirmDelete = (products) => {
         confirmAlert({
-          title: "CUIDADO !!!!",
+          title: "CAUTION !!!!",
           message:
-            "deseja realmente excluir a categoria " +
-            categories.id +
+            "Are you absolutely sure you want to delete section " +
+            products.id +
             "?",
           buttons: [
             {
-              label: "Sim",
-              onClick: () => handleDelete(categories.id)
+              label: "Yes",
+              onClick: () => handleDelete(products.id) 
             },
             {
-              label: "Nao",
-              onClick: () => history.push("/categories")
+              label: "No",
+              onClick: () => history.push("/produtos")
             }
           ]
         });
       };
 
-    const handleDelete = async (idCategories) => {
-        console.log(idCategories);
+    const handleDelete = async (idProducts) => {
+        console.log(idProducts);
 
         const valueToken = localStorage.getItem('token');
         const headers = {
@@ -53,7 +52,7 @@ export const ListaCategories = () => {
             }
         }
 
-        await api.delete("/categories/delete/"+idCategories, headers)
+        await api.delete("/products/delete/"+idProducts, headers)
         .then( (response) => {
             setStatus({
                 type: 'sucess',
@@ -75,8 +74,8 @@ export const ListaCategories = () => {
         })
     }
 
-    const getCategories = async () => {
-
+    const getProducts = async () => {
+        
         const valueToken = localStorage.getItem('token');
         const headers = {
             'headers': {
@@ -84,9 +83,9 @@ export const ListaCategories = () => {
             }
         }
 
-        await api.get("/categories/all", headers)
+        await api.get("/products/all" , headers)
             .then( (response) => {
-                setData(response.data.categories)
+                setData(response.data.products);
                 setStatus({loading: false})
             }).catch( (err) => {
                 if(err.response){
@@ -104,22 +103,21 @@ export const ListaCategories = () => {
     }
 
     useEffect( () => {
-        getCategories();
+        getProducts();
     }, [])
-    return (
+
+    return(
         <>
         
         <div className="heder1">
             
         <ul className="heder">
         <li>
-        <Button variant="outline-success"   className="btn-novaCategoria"> <Link to="/categories/novo" className="linkbtn">Nova Categoria</Link> </Button>   
-         </li>
-        <li>
-        <Button variant="outline-success"   className="btn-novaCategoria"> <Link to="/produtos" className="linkbtn">produtos</Link> </Button>   
+        <Button variant="outline-success"   className="btn-novaCategoria"> <Link to="/categories" className="linkbtn">Categorias</Link> </Button> 
         </li>
-        
-       
+        <li>
+        <Button variant="outline-success"   className="btn-novaCategoria"> <Link to="/products/novo" className="linkbtn">Novo produto</Link> </Button>
+        </li>
        </ul>
        </div >
        
@@ -128,20 +126,26 @@ export const ListaCategories = () => {
                 <tbody>
                     <tr className="tr-table">
                     <th>#</th>
-                    <th>Nome</th>
-                    <th>descrição</th>
+                        <th>Nome</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>CategorieId</th>
                     
                     </tr>
-                {data.map(categories => (
-                        <tr key={categories.id}>
-                            <td>{categories.id}</td>
-                            <td>{categories.name}</td>
-                            <td>{categories.description}</td>
+                {data.map(products => (
+                        <tr key={products.id}>
+                            <td>{products.id}</td>
+                            <td>{products.name}</td>
+                            <td>{products.description}</td>
+                            <td>{products.quantity}</td>
+                            <td>{products.price}</td>
+                            <td>{products.categorieId}</td>
                             <td className="td-editar">
                             <button >
-                                <Link className="btn-editar" to={"/categories/editar/"+categories.id}>Editar</Link>
+                                <Link className="btn-editar" to={"/products/editar/"+products.id}>Editar</Link>
                             </button>
-                            <button className="btn-excluir" onClick={() => confirmDelete(categories)} > 
+                            <button className="btn-excluir" onClick={() => confirmDelete(products)} > 
                             Excluir                                
                             </button>
                             </td>
@@ -156,6 +160,5 @@ export const ListaCategories = () => {
 
         
         </>
-        
     )
 }
