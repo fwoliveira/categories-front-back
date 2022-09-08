@@ -26,16 +26,16 @@ export const ListaProducts = () => {
         confirmAlert({
           title: "CAUTION !!!!",
           message:
-            "Are you absolutely sure you want to delete section " +
+            "Deseja deletar esse produto " +
             products.id +
             "?",
           buttons: [
             {
-              label: "Yes",
+              label: "Sim",
               onClick: () => handleDelete(products.id) 
             },
             {
-              label: "No",
+              label: "Não",
               onClick: () => history.push("/produtos")
             }
           ]

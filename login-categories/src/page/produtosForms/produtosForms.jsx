@@ -42,47 +42,7 @@ export const ProductsForm = (props) => {
         [e.target.name]: e.target.value
     })
 
-    useEffect( () => {
-
-        const getProducts = async () => {
-  
-          const valueToken = localStorage.getItem('token');
-          const headers = {
-              'headers': {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + valueToken
-              }
-          }
-  
-          await api.get("/products/show/"+ id , headers)
-              .then( (response) => {
-                  if(response.data.products){
-                    setValues(response.data.products);
-                    setAcao('Editar')
-                  } else {
-                    setStatus({
-                      type: 'warning',
-                      mensagem:'Categorias não encontrada!!!'
-                    })
-                  } 
-                  // setData(response.data.users)
-              }).catch( (err) => {
-                  if(err.response){
-                      setStatus({
-                          type:'error',
-                          mensagem: err.response.data.mensagem
-                      })
-                  } else {
-                      setStatus({
-                          type:'error',
-                          mensagem: 'Erro: tente mais tarde produto.....!'
-                      })
-                  }
-              })
-      }
-      
-      if(id) getProducts();
-      }, [id])
+   
 
     const getCategories = async () => {
         const headers = {
@@ -120,6 +80,47 @@ export const ProductsForm = (props) => {
         getCategories()
     },[])
 
+    useEffect( () => {
+
+        const getProducts = async () => {
+  
+          const valueToken = localStorage.getItem('token');
+          const headers = {
+              'headers': {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + valueToken
+              }
+          }
+  
+          await api.get("/products/show/"+ id , headers)
+              .then( (response) => {
+                  if(response.data.products){
+                    setProducts(response.data.products);
+                    setAcao('Editar')
+                  } else {
+                    setStatus({
+                      type: 'warning',
+                      mensagem:'Categorias não encontrada!!!'
+                    })
+                  } 
+                  // setData(response.data.users)
+              }).catch( (err) => {
+                  if(err.response){
+                      setStatus({
+                          type:'error',
+                          mensagem: err.response.data.mensagem
+                      })
+                  } else {
+                      setStatus({
+                          type:'error',
+                          mensagem: 'Erro: tente mais tarde produto.....!'
+                      })
+                  }
+              })
+      }
+      
+      if(id) getProducts();
+      }, [id])
 
  
     
@@ -161,7 +162,7 @@ export const ProductsForm = (props) => {
             await api.put("/products/update", products, headers)
                 .then((response) => {
                     setStatus({ loading: false })
-                    return history.push('/products')
+                    return history.push('/produtos')
                 }).catch((err) => {
                     if (err.response) {
                         setStatus({

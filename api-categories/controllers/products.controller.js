@@ -31,8 +31,7 @@ exports.findOne = async (req, res) => {
         //         mensagem: "Erro Nehum Produto encontrado!"
         //     })
         // }
-        const products = await Products.findAll({
-            where: {id: id},
+        const products = await Products.findByPk(id,{
             include:[Categories]
         });
         if(!products) {
